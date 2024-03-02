@@ -43,8 +43,10 @@ export function AuthProvider({ children }) {
 			const res = await loginRequest(user);
 			console.log("los datos se enviarion");
 			console.log(res);
-			setUser(res.data);
-			setIsAutenticated(true);
+			if(res.data !== null){
+				setUser(res.data);
+				setIsAutenticated(true);
+			}
 			
 		} catch (error) {
 			console.log(error);
