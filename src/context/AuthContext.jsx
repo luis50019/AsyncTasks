@@ -41,10 +41,13 @@ export function AuthProvider({ children }) {
 	const singIn = async (user) => {
 		try {
 			const res = await loginRequest(user);
+			console.log("los datos se enviarion");
+			console.log(res);
 			setUser(res.data);
 			setIsAutenticated(true);
-
+			
 		} catch (error) {
+			console.log(error);
 			if (Array.isArray(error.response.data)) {
 				setErrors(error.response.data);
 				return
