@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const URL =import.meta.env.VITE_URL_BASE || "http://localhost:4000";
+const URL =import.meta.env.VITE_URL_BASE || "https://apiasynctask-dev-mnsm.4.us-1.fl0.io";
 const instance = axios.create({
-	baseURL: `${URL}/`,
+	baseURL: URL,
 	withCredentials: true
 })
 
