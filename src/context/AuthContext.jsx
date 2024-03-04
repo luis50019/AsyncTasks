@@ -41,9 +41,7 @@ export function AuthProvider({ children }) {
 	const singIn = async (user) => {
 		try {
 			const res = await loginRequest(user);
-			console.log("los datos se enviarion");
-			console.log(res);
-			if(res.data !== null){
+			if(res !== null){
 				setUser(res.data);
 				setIsAutenticated(true);
 			}
@@ -77,7 +75,7 @@ export function AuthProvider({ children }) {
 	useEffect(() => {
 		async function checkLogin() {
 			const cookies = Cookies.get();
-			console.log("token",cookies.token);
+			console.log("token",cookies);
 
 			if (!cookies.token) {
 				setIsAutenticated(false);
