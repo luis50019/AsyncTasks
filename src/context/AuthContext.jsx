@@ -104,7 +104,7 @@ export function AuthProvider({ children }) {
 		}
 
 		checkLogin();
-	}, []);
+	}, [isAutenticated]);
 
 	return (
 		<AuthContext.Provider value={{
