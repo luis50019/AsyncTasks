@@ -44,6 +44,8 @@ export function AuthProvider({ children }) {
 			if(res !== null){
 				setUser(res.data);
 				setIsAutenticated(true);
+				const cookies = Cookies.get();
+				console.log("token: login: ",cookies);
 			}
 			
 		} catch (error) {
