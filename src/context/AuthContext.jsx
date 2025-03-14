@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { loginRequest, registerRequest, veryfyTokenRequest } from "../api/auth";
-
+import { loginRequest, registerRequest, veryfyTokenRequest,logoutRequest } from "../api/auth";
 import Cookies from 'js-cookie';
 
 export const AuthContext = createContext();
@@ -57,10 +56,15 @@ export function AuthProvider({ children }) {
 			setErrors([error.response.data]);
 		}
 	}
-	const logOut = () => {
-		Cookies.remove("token")
-		setIsAutenticated(false);
-		setErrors([])
+	const logOut = async() => {
+		try{
+			await logoutRequest();
+			setErrors([])
+			setIsAutenticated(false);
+			
+		}catch(e){
+			setErrors(errors.response.data)
+		}
 	}
 
 
@@ -79,14 +83,14 @@ export function AuthProvider({ children }) {
 			const cookies = Cookies.get();
 			console.log("token",cookies);
 
-			if (!cookies.token) {
+			if (!cookies.access_token) {
 				setIsAutenticated(false);
 				setLoading(false);
 				return setUser(null);
 			}
 
 			try {
-				const res = await veryfyTokenRequest(cookies.token);
+				const res = await veryfyTokenRequest(cookies.access_token);
 				if (!res.data) {
 					setIsAutenticated(false);
 					setLoading(false);
